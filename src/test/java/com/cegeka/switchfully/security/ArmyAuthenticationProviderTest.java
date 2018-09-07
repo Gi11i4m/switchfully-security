@@ -2,11 +2,14 @@ package com.cegeka.switchfully.security;
 
 import com.cegeka.switchfully.security.external.authentication.FakeAuthenticationService;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.jaas.JaasAuthenticationToken;
@@ -19,6 +22,9 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ArmyAuthenticationProviderTest {
+
+  @Rule
+  public ExpectedException expectedException = ExpectedException.none();
 
   @Mock
   private FakeAuthenticationService fakeAuthenticationService;
@@ -42,11 +48,12 @@ public class ArmyAuthenticationProviderTest {
     assertThat(authentication.isAuthenticated()).isTrue();
   }
 
-  @Test
-  public void authenticate_IncorrectCombo_ShouldReturnNull() {
-    Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken("ZWANETTA", "BEST"));
+  @Test()
+  public void authenticate_IncorrectCombo_ShouldThrowBadCredentialsException() {
+    expectedException.expect(BadCredentialsException.class);
+    expectedException.expectMessage("Access denied");
 
-    assertThat(authentication).isNull();
+    Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken("ZWANETTA", "BEST"));
   }
 
   @Test
