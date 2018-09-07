@@ -16,14 +16,13 @@ public class CommonConfig {
     @Primary
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.setVisibility(
-                mapper.getSerializationConfig().getDefaultVisibilityChecker()
-                        .withFieldVisibility(ANY)
-                        .withGetterVisibility(NONE)
-                        .withIsGetterVisibility(NONE)
-                        .withSetterVisibility(NONE)
-                        .withCreatorVisibility(NONE)
+        return mapper.setVisibility(
+            mapper.getSerializationConfig().getDefaultVisibilityChecker()
+                .withFieldVisibility(ANY)
+                .withGetterVisibility(NONE)
+                .withIsGetterVisibility(NONE)
+                .withSetterVisibility(NONE)
+                .withCreatorVisibility(NONE)
         );
-        return mapper;
     }
 }

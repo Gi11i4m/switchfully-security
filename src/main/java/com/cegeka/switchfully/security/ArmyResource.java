@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.cegeka.switchfully.security.ArmyInfoDto.armyInfoDto;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -15,11 +16,11 @@ public class ArmyResource {
 
     @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE ,path = "/{country}")
     public ArmyInfoDto getDeployedArmyInfo(@PathVariable(value = "country") String country){
-        return ArmyInfoDto.armyInfoDto()
-                .withCountry(country)
-                .withNumberOfTroops(2000)
-                .withxCoordinateOfBase(15)
-                .withyCoordinateOfBase(20);
+        return armyInfoDto()
+            .withCountry(country)
+            .withNumberOfTroops(2000)
+            .withxCoordinateOfBase(15)
+            .withyCoordinateOfBase(20);
     }
 
     @RequestMapping(method = RequestMethod.POST)
