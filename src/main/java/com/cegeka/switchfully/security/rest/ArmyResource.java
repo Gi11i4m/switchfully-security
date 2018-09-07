@@ -17,7 +17,7 @@ public class ArmyResource {
     //@PreAutorise annotation only allows user with any of the given roles to access the method. (you could also place it on class level)
     //advantages: it's right near the code for the actual rest-controller
     //disadvantages: you may have to repeat it for every method.
-    @PreAuthorize("hasAnyAuthority('GENERAL', 'PRIVATE')")
+    @PreAuthorize("hasAuthority('ACCESS_SENSITIVE_INFO')")
     @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE, path = "/{country}")
     public ArmyInfoDto getDeployedArmyInfo(@PathVariable(value = "country") String country) {
         return ArmyInfoDto.armyInfoDto()
@@ -27,25 +27,25 @@ public class ArmyResource {
                 .withyCoordinateOfBase(20);
     }
 
-    @PreAuthorize("hasAuthority('CIVILIAN')")
+    @PreAuthorize("hasAuthority('ENROLL')")
     @RequestMapping(method = RequestMethod.POST)
     public void joinArmy() {
         //TODO
     }
 
-    @PreAuthorize("hasAuthority('HUMAN_RELATIONSHIPS')")
+    @PreAuthorize("hasAuthority('MANAGE_SOLDIERS')")
     @RequestMapping(method = RequestMethod.POST, path = "/promote/{name}")
     public void promotePrivate(@PathVariable(value = "name") String name) {
         //TODO
     }
 
-    @PreAuthorize("hasAuthority('HUMAN_RELATIONSHIPS')")
+    @PreAuthorize("hasAuthority('MANAGE_SOLDIERS')")
     @RequestMapping(method = RequestMethod.POST, path = "/discharge/{name}")
     public void dischargeSoldier(@PathVariable(value = "name") String name) {
         //TODO
     }
 
-    @PreAuthorize("hasAuthority('GENERAL')")
+    @PreAuthorize("hasAuthority('NUKE_THE_WORLD')")
     @RequestMapping(method = RequestMethod.GET, path = "/nuke")
     public String launchNukes() {
         return "The world ends. Not with a bang but a whimper";

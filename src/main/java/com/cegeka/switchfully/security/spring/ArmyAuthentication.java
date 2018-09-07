@@ -6,9 +6,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static java.util.stream.Collectors.toList;
 
 public class ArmyAuthentication implements Authentication {
 
@@ -21,7 +21,7 @@ public class ArmyAuthentication implements Authentication {
         this.username = username;
         this.roles = roles.stream()
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                .collect(toList());
         this.credentials = credentials;
     }
 
