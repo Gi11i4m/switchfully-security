@@ -2,26 +2,26 @@ package com.cegeka.switchfully.security.external.authentication;
 
 import java.util.List;
 
-public class ExternalAuthenticaton {
+public class ExternalAuthentication {
     private String username;
     private String password;
     private List<String> roles;
 
-    public static ExternalAuthenticaton externalAuthenticaton(){
-        return new ExternalAuthenticaton();
+    public static ExternalAuthentication externalAuthenticaton(){
+        return new ExternalAuthentication();
     }
 
-    public ExternalAuthenticaton withUsername(String username) {
+    public ExternalAuthentication withUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public ExternalAuthenticaton withPassword(String password) {
+    public ExternalAuthentication withPassword(String password) {
         this.password = password;
         return this;
     }
 
-    public ExternalAuthenticaton withRoles(List<String> roles) {
+    public ExternalAuthentication withRoles(List<String> roles) {
         this.roles = roles;
         return this;
     }
